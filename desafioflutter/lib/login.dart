@@ -55,6 +55,9 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
               ),
+              style: TextStyle(
+                color: CupertinoColors.extraLightBackgroundGray,
+              ),
             ),
             const SizedBox(height: 20),
             TextField(
@@ -75,6 +78,9 @@ class LoginPage extends StatelessWidget {
                     color: CupertinoColors.opaqueSeparator,
                   ),
                 ),
+              ),
+              style: const TextStyle(
+                color: CupertinoColors.extraLightBackgroundGray,
               ),
             ),
             const SizedBox(height: 24),
