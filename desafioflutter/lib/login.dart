@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +9,6 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(title: const Text("Location Changer")),
       body: Container(
         color: CupertinoColors.destructiveRed,
         padding: const EdgeInsets.all(16.0),
@@ -15,6 +16,10 @@ class LoginPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            Image.network('https://cdn-icons-png.flaticon.com/512/3706/3706711.png',
+            width: 20,
+            height: 200,
+            ),
             const Text("Location Changer",
             style: TextStyle(
               fontSize: 24,
@@ -35,7 +40,20 @@ class LoginPage extends StatelessWidget {
             TextField(
               decoration: const InputDecoration(
                 labelText: "Email",
+                labelStyle: TextStyle(
+                  color: CupertinoColors.extraLightBackgroundGray,
+                ),
                 border: OutlineInputBorder(),
+                enabledBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: CupertinoColors.inactiveGray,
+                  )
+                ),
+                focusedBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: CupertinoColors.opaqueSeparator,
+                  ),
+                ),
               ),
             ),
             const SizedBox(height: 20),
@@ -43,7 +61,20 @@ class LoginPage extends StatelessWidget {
               obscureText: true,
               decoration: const InputDecoration(
                 labelText: "Password",
+                labelStyle: TextStyle(
+                  color: CupertinoColors.extraLightBackgroundGray,
+                ),
                 border: OutlineInputBorder(),
+                enabledBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: CupertinoColors.inactiveGray,
+                  ),
+                ),
+                focusedBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: CupertinoColors.opaqueSeparator,
+                  ),
+                ),
               ),
             ),
             const SizedBox(height: 24),
