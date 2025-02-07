@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  static const String baseUrl = "http://localhost:8080/auth/login"
+  static const String baseUrl = "http://localhost:8080/auth/login";
 
   Future<String> login(String email, String senha) async {
     final response = await http.post(
