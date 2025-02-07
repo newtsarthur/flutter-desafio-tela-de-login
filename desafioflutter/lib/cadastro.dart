@@ -12,7 +12,9 @@ class CadastroPage extends StatefulWidget {
 class _CadastroPageState extends State<CadastroPage> {
   final TextEditingController _nomeController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _confirmEmailController = TextEditingController();
   final TextEditingController _senhaController = TextEditingController();
+  final TextEditingController _confirmSenhaController = TextEditingController();
   final ApiService _apiService = ApiService();
   bool _isLoading = false;
 
@@ -20,6 +22,19 @@ class _CadastroPageState extends State<CadastroPage> {
     setState(() {
       _isLoading = true;
     });
+
+    if(_senhaController.text != _confirmSenhaController.text) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("As senhas estão diferentes. Por favor digite sua senha novamente!"),
+        backgroundColor: Colors.red,
+        ),
+      );
+      setState(() {
+        _isLoading = false;
+      });
+      return;
+    }
 
     try {
       String response = await _apiService.cadastrarUsuario(_nomeController.text, _emailController.text, _senhaController.text);
@@ -131,6 +146,30 @@ class _CadastroPageState extends State<CadastroPage> {
               obscureText: true,
               decoration: const InputDecoration(
                 labelText: "Senha",
+                labelStyle: TextStyle(
+                  color: CupertinoColors.extraLightBackgroundGray,
+                ),
+                border: OutlineInputBorder(),
+                enabledBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: CupertinoColors.inactiveGray,
+                  ),
+                ),
+                focusedBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: CupertinoColors.opaqueSeparator,
+                  ),
+                ),
+              ),
+              style: const TextStyle(
+                color: CupertinoColors.extraLightBackgroundGray,
+              ),
+            ),            const SizedBox(height: 20),
+            TextField(
+              controller: _confirmSenhaController,
+              obscureText: true,
+              decoration: const InputDecoration(
+                labelText: "Confirme sua senha",
                 labelStyle: TextStyle(
                   color: CupertinoColors.extraLightBackgroundGray,
                 ),
