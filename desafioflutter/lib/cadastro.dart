@@ -2,35 +2,36 @@ import 'package:flutter/material.dart';
 import '../services/api_service.dart';
 import 'package:flutter/cupertino.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class CadastroPage extends StatefulWidget {
+  const CadastroPage({super.key});
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _CadastroPageState createState() => _CadastroPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _CadastroPageState extends State<CadastroPage> {
+  final TextEditingController _nomeController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _senhaController = TextEditingController();
   final ApiService _apiService = ApiService();
   bool _isLoading = false;
 
-  void _login() async {
+  void _cadastrarUsuario() async {
     setState(() {
       _isLoading = true;
     });
 
     try {
-      String response = await _apiService.login(_emailController.text, _senhaController.text);
+      String response = await _apiService.cadastrarUsuario(_nomeController.text, _emailController.text, _senhaController.text);
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("Login realizado com sucesso!"),
+          content: Text("Cadastro realizado com sucesso!"),
           backgroundColor: Colors.green,
         ),
       );
       
-      // Aqui você pode adicionar navegação para outra tela após login
+      // Aqui você pode adicionar navegação para outra tela após Cadastro
       // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -76,7 +77,31 @@ class _LoginPageState extends State<LoginPage> {
               fontWeight: FontWeight.bold,
             ),
             textAlign: TextAlign.center,
+            ),            const SizedBox(height: 20),
+            TextField(
+              controller: _nomeController,
+              decoration: const InputDecoration(
+                labelText: "Nome",
+                labelStyle: TextStyle(
+                  color: CupertinoColors.extraLightBackgroundGray,
+                ),
+                border: OutlineInputBorder(),
+                enabledBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: CupertinoColors.inactiveGray,
+                  )
+                ),
+                focusedBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: CupertinoColors.opaqueSeparator,
+                  ),
+                ),
+              ),
+              style: TextStyle(
+                color: CupertinoColors.extraLightBackgroundGray,
+              ),
             ),
+            const SizedBox(height: 20),
             TextField(
               controller: _emailController,
               decoration: const InputDecoration(
@@ -129,7 +154,7 @@ class _LoginPageState extends State<LoginPage> {
             _isLoading
                 ? const Center(child: CircularProgressIndicator())
                 : ElevatedButton(
-                    onPressed: _login,
+                    onPressed: _cadastrarUsuario,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(vertical: 20),
@@ -138,7 +163,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     child: const Text(
-                      "Login",
+                      "Cadastrar",
                       style: TextStyle(
                         fontSize: 18,
                         color: Colors.redAccent,
