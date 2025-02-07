@@ -1,10 +1,50 @@
-import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../services/api_service.dart';
+import 'package:flutter/cupertino.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _senhaController = TextEditingController();
+  final ApiService _apiService = ApiService();
+  bool _isLoading = false;
+
+  void _login() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      String response = await _apiService.login(_emailController.text, _senhaController.text);
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Login realizado com sucesso!"),
+          backgroundColor: Colors.green,
+        ),
+      );
+      
+      // Aqui você pode adicionar navegação para outra tela após login
+      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Erro: ${e.toString()}"),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+
+    setState(() {
+      _isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +78,7 @@ class LoginPage extends StatelessWidget {
             textAlign: TextAlign.center,
             ),
             TextField(
+              controller: _emailController,
               decoration: const InputDecoration(
                 labelText: "Email",
                 labelStyle: TextStyle(
@@ -61,9 +102,10 @@ class LoginPage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             TextField(
+              controller: _senhaController,
               obscureText: true,
               decoration: const InputDecoration(
-                labelText: "Password",
+                labelText: "Senha",
                 labelStyle: TextStyle(
                   color: CupertinoColors.extraLightBackgroundGray,
                 ),
@@ -84,20 +126,26 @@ class LoginPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 24),
-            ElevatedButton(
-              onPressed: () {
-
-              },
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 25),
-              ), child: const Text("Login",
-                style: TextStyle(
-                  fontSize: 20,
-                  color: CupertinoColors.destructiveRed,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
+            _isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : ElevatedButton(
+                    onPressed: _login,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 15),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                    child: const Text(
+                      "Login",
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.redAccent,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
           ],
         ),
       ),
