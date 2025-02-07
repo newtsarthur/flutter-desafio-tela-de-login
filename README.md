@@ -5,10 +5,21 @@ Este é o projeto de resolução do desafio de um curso gratuito de Flutter. O o
 ## Funcionalidades
 
 - Tela de login com campos para email e senha.
+- Tela de cadastro para novos usuários.
 - Interface com elementos modernos, como `TextField` e `ElevatedButton`.
 - Exibição de imagem na parte superior da tela.
 - Personalização da cor da borda do campo de texto.
 - Configuração da cor do texto digitado.
+
+## Screenshots
+
+Aqui estão algumas capturas de tela da aplicação:
+
+### Tela de Login
+![Tela de Login](assets/Login.png)
+
+### Tela de Cadastro
+![Tela de Cadastro](assets/Cadastro.png)
 
 ## Como usar
 
@@ -22,3 +33,19 @@ Este é o projeto de resolução do desafio de um curso gratuito de Flutter. O o
 1. Clone este repositório:
    ```bash
    git clone https://github.com/seu-usuario/location-changer.git
+   ```
+
+2. Navegue até a pasta do projeto:
+   ```bash
+   cd location-changer
+   ```
+
+3. Instale as dependências:
+   ```bash
+   flutter pub get
+   ```
+
+4. Execute o projeto:
+   ```bash
+   flutter run
+   ```
