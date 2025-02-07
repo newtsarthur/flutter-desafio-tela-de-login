@@ -16,10 +16,10 @@ Este é o projeto de resolução do desafio de um curso gratuito de Flutter. O o
 Aqui estão algumas capturas de tela da aplicação:
 
 ### Tela de Login
-![Tela de Login](assets/Login.png)
+![Tela de Login](./desafioflutter/assets/Login.png)
 
 ### Tela de Cadastro
-![Tela de Cadastro](assets/Cadastro.png)
+![Tela de Cadastro](./desafioflutter/assets/Cadastro.png)
 
 ## Como usar
 
